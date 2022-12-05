@@ -11,11 +11,11 @@ pool:
 
 variables: 
 - name: Parameters.ConnectedServiceName
-  value: e41dbaa4-dee2-46f5-af6a-474e47050169
+  value: 'Azure subscription 1'
 - name: Parameters.WebAppKind
-  value: Web App on Linux
+  value: 'Web App on Linux'
 - name: Parameters.WebAppName
-  value: aj-webapp-demo
+  value: 'aj-webapp-demo'
   
 steps:
 - task: Maven@3
