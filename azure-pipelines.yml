@@ -30,3 +30,11 @@ steps:
     ArtifactName: 'warfile'
     publishLocation: 'Container'
 
+- task: AzureRmWebAppDeployment@4
+  displayName: 'Deploy Azure App Service'
+  inputs:
+    azureSubscription: '$(Parameters.ConnectedServiceName)'
+    appType: '$(Parameters.WebAppKind)'
+    WebAppName: '$(Parameters.WebAppName)'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.war'
+    StartupCommand: '$(Parameters.StartupCommand)'
