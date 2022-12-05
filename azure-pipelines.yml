@@ -6,6 +6,19 @@
 trigger:
 - master
 
+#change required to add the YAML deploy job
+variables:
+- name: ConnectedServiceName
+  value: 'Azure subscription 1'
+
+- name: WebAppKind
+  value: 'Web App on Linux'
+
+- name: WebAppName
+  value: 'aj-webapp-demo'
+
+#end change required to add the YAML deploy job
+
 pool:
   vmImage: ubuntu-latest
 
@@ -30,6 +43,7 @@ steps:
     ArtifactName: 'warfile'
     publishLocation: 'Container'
 
+#deploy YAML
 - task: AzureRmWebAppDeployment@4
   displayName: 'Deploy Azure App Service'
   inputs:
@@ -38,3 +52,4 @@ steps:
     WebAppName: '$(Parameters.WebAppName)'
     packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.war'
     StartupCommand: '$(Parameters.StartupCommand)'
+#deploy YAML
