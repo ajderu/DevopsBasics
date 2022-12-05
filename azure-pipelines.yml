@@ -9,6 +9,14 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
+variables: 
+- name: Parameters.ConnectedServiceName
+  value: e41dbaa4-dee2-46f5-af6a-474e47050169
+- name: Parameters.WebAppKind
+  value: Web App on Linux
+- name: Parameters.WebAppName
+  value: aj-webapp-demo
+  
 steps:
 - task: Maven@3
   inputs:
@@ -29,3 +37,11 @@ steps:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
     ArtifactName: 'warfile'
     publishLocation: 'Container'
+- task: AzureRmWebAppDeployment@4
+  displayName: 'Deploy Azure App Service'
+  inputs:
+    azureSubscription: '$(Parameters.ConnectedServiceName)'
+    appType: '$(Parameters.WebAppKind)'
+    WebAppName: '$(Parameters.WebAppName)'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.war'
+    StartupCommand: '$(Parameters.StartupCommand)'
