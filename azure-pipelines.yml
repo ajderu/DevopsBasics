@@ -31,11 +31,11 @@ steps:
     publishLocation: 'Container'
 - task: Docker@2
   inputs:
-    containerRegistry: 'ajderuDockerHub'
+    containerRegistry: 'VOLPAYacr'
     command: 'login'
 - task: Docker@2
   inputs:
-    containerRegistry: 'ajderuDockerHub'
-    repository: 'adrianjderu / azuredevops'
+    containerRegistry: 'VOLPAYacr'
+    repository: 'Java_CI_ACR'
     command: 'buildAndPush'
     Dockerfile: '**/AzureDockerfile'
